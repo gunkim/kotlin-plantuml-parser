@@ -1,8 +1,8 @@
 package io.github.babiesdev.clazz
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeSameInstanceAs
 
 class FieldInfoTest : BehaviorSpec({
     Given("두개를 변환") {
@@ -26,11 +26,10 @@ class FieldInfoTest : BehaviorSpec({
             }
         }
 
-        When("잘못된 값") {
-            val result = FieldInfo.isField(expectFalse)
 
-            Then("False를 응답") {
-                result shouldBeSameInstanceAs IllegalArgumentException("The value is not a field")
+        When("잘못된 값") {
+            shouldThrow<IllegalArgumentException> {
+                FieldInfo.isField(expectFalse)
             }
         }
     }
