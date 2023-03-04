@@ -1,13 +1,21 @@
 package io.github.babiesdev.clazz
 
-import org.junit.jupiter.api.Test
+import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.matchers.shouldNotBe
 import java.nio.file.Paths
 
-class ReaderFunctionKtTest {
+class ReaderFunctionKtTest : BehaviorSpec({
 
-    @Test
-    fun readTest() {
-        val clazz =
-            pathToStrings(Paths.get("C:\\workspace\\kotlin-plantuml-parser\\core\\src\\main\\kotlin\\io\\github\\babiesdev\\sample\\TestData.kt"))
+    Given("파일경로") {
+        val path = Paths.get("../parser/src/test/kotlin/io/github/babiesdev/sample/TestData.kt")
+
+        When("경로를 세팅하여 글자로 변환") {
+            val result = pathToStrings(path)
+
+            Then("빈값이 튀어나와선 안된다") {
+                result shouldNotBe ""
+            }
+        }
+
     }
-}
+})
