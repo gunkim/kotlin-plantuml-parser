@@ -1,5 +1,9 @@
 package io.github.babiesdev.clazz
 
+val withAccessor = Regex("""(private|public|protected)?\s+(val|var)\s+\w+\s*:\s*\w+""")
+val singleness = Regex("""(val|var)\s+\w+\s*:\s*\w+""")
+fun isField(raw:String) = withAccessor.matches(raw) || singleness.matches(raw)
+
 class FieldInfo(
     val accessor: Accessor,
     val changeable: Changeable,
@@ -9,9 +13,6 @@ class FieldInfo(
 
     companion object {
         fun isField(values: String): FieldInfo {
-            val withAccessor = Regex("""(private|public|protected)?\s+(val|var)\s+\w+\s*:\s*\w+""")
-            val singleness = Regex("""(val|var)\s+\w+\s*:\s*\w+""")
-
             val valueList = values.split(" ")
 
             return when {
@@ -28,8 +29,8 @@ class FieldInfo(
 
         }
 
-        private fun changeable(chageable: String): Changeable {
-            return when (chageable) {
+        private fun changeable(changeable: String): Changeable {
+            return when (changeable) {
                 "val" -> Changeable.VAL
                 "var" -> Changeable.VAR
                 else -> throw IllegalArgumentException("Changeable must be val or var")

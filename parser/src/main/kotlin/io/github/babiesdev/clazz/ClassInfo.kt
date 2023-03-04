@@ -19,7 +19,6 @@ class ClassInfo(
             val parsed = pathToStrings(path).lines()
             val className = path.fileName.toString().removeSuffix(".kt")
             val path = path
-            // parsed의 첫번째 줄을 가져온뒤 첫번째을 삭제 한다
             val packages = parsed.first().removePrefix("package ")
 
 
