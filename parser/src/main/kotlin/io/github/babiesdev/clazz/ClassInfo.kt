@@ -4,7 +4,7 @@ import java.nio.file.Path
 import kotlin.io.path.extension
 
 class ClassInfo(
-    val name: String,
+    val className: String,
     val path: Path,
     val packages:String,
     val methods: List<MethodInfo>,
@@ -16,12 +16,18 @@ class ClassInfo(
     }
     companion object{
         fun fromPath(path: Path): ClassInfo {
-            val name = path.fileName.toString().removeSuffix(".kt")
-            val packages = path.parent.toString().replace("\\", ".").removePrefix("src.main.kotlin.")
+            val parsed = pathToStrings(path).lines()
+            val className = path.fileName.toString().removeSuffix(".kt")
+            val path = path
+            // parsed의 첫번째 줄을 가져온뒤 첫번째을 삭제 한다
+            val packages = parsed.first().removePrefix("package ")
+
+
+
             val methods = TODO()
             val fields = TODO()
             val imports = TODO()
-            return ClassInfo(name, path, packages, methods, fields, imports)
+            return ClassInfo(className, path, packages, methods, fields, imports)
         }
     }
 }
