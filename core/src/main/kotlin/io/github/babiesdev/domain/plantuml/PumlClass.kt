@@ -9,9 +9,9 @@ class PumlClass(
 ) {
     fun toPlantUml() = """
             |${visibility.symbol}class ${basePackage.name}.${name} {
-            |   ${fields.joinToString(separator = "") { it.toPlantUml() }}
-            |   --
-            |   ${methods.joinToString(separator = "") { it.toPlantUml() }}
+            |  ${fields.joinToString(separator = "\n  ") { it.toPlantUml() }}
+            |  --
+            |  ${methods.joinToString(separator = "\n  ") { it.toPlantUml() }}
             |}
     """.trimMargin()
 }
