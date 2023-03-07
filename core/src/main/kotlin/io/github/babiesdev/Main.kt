@@ -1,10 +1,7 @@
 package io.github.babiesdev
 
 import io.github.babiesdev.domain.PumlGenerator
-import io.github.babiesdev.domain.plantuml.PumlClass
-import io.github.babiesdev.domain.plantuml.PumlField
-import io.github.babiesdev.domain.plantuml.PumlMethod
-import io.github.babiesdev.domain.plantuml.PumlPackage
+import io.github.babiesdev.domain.plantuml.*
 import kotlin.io.path.Path
 import kotlin.io.path.writeText
 
@@ -31,6 +28,10 @@ fun main() {
                         ),
                     ),
                 ),
+                PumlRelation(
+                    target = "io.github.babiesdev.Test",
+                    type = RelationType.EXTENSION,
+                )
             ),
         ),
     )

@@ -5,6 +5,7 @@ class PumlClass(
     private val basePackage: PumlPackage,
     private val fields: List<PumlField>,
     private val methods: List<PumlMethod>,
+    private val relation: PumlRelation,
     private val visibility: Visibility = Visibility.PUBLIC,
 ) {
     fun toPlantUml() = """
@@ -13,5 +14,6 @@ class PumlClass(
             |  --
             |  ${methods.joinToString(separator = "\n  ") { it.toPlantUml() }}
             |}
+            |${relation.toPlantUml("${basePackage.name}.${name}")}
     """.trimMargin()
 }
