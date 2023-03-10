@@ -16,13 +16,12 @@ import kotlinx.ast.grammar.kotlin.common.summary
 import kotlinx.ast.grammar.kotlin.common.summary.PackageHeader
 import kotlinx.ast.grammar.kotlin.target.antlr.kotlin.KotlinGrammarAntlrKotlinParser
 import java.nio.file.Path
-import java.util.*
 import kotlin.io.path.isDirectory
 import kotlin.io.path.listDirectoryEntries
 import kotlin.io.path.pathString
 
 fun main() {
-    val rootPath = Path.of("/Users/gunkim/private-workspace/kotlin-plantuml-parser/core/src/main/kotlin/io/github/babiesdev/domain")
+    val rootPath = Path.of("/Users/gunkim/private-workspace/kotlin-plantuml-parser/core/src/main/kotlin/io/github/babiesdev/domain/plantuml")
 
     val subPaths = rootPath.subdirectoriesPaths
     val asts = subPaths.flatMap(::convertPathToAsts)
@@ -51,14 +50,14 @@ private fun createPumlClass(
     header: String
 ) = PumlClass(
     name = it.name,
-    type = PumlClassType.valueOf(it.type),
+    type = PumlClassType.valueOf(it.type.uppercase()),
     basePackage = PumlPackage(header),
     fields = it.fields.map(ParsingParameter::convert),
     methods = it.methods.map(ParsingFunction::convert),
 )
 
 private fun createParsingClass(it: KlassDeclaration) = ParsingClass(
-    type = it.keyword.uppercase(Locale.getDefault()),
+    type = if (it._modifiers == "enum") "enum" else it.keyword,
     name = it.identifier!!.rawName,
     fields = it._fields,
     methods = it._methods,
@@ -125,8 +124,12 @@ private val KlassDeclaration._methods: List<ParsingFunction>
     }
 
 private val Path.subdirectoriesPaths: List<Path>
-    get() = listDirectoryEntries()
-        .flatMap {
-            if (it.isDirectory()) it.listDirectoryEntries()
-            else listOf(it)
-        }
+    get() = if (isDirectory()) {
+        listDirectoryEntries()
+            .flatMap {
+                if (it.isDirectory()) it.listDirectoryEntries()
+                else listOf(it)
+            }
+    } else {
+        listOf(this)
+    }
