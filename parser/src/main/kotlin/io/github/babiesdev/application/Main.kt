@@ -108,7 +108,7 @@ private val KlassDeclaration._methods: List<ParsingFunction>
         return astNode.children.filterIsInstance<KlassDeclaration>().map { it ->
             ParsingFunction(
                 it.identifier!!.rawName,
-                it.parameter.map(ParsingParameter.Companion::convert),
+                it.parameter.map(io.github.babiesdev.application.ast.ParsingParameter.Companion::convert),
                 if (it.type.isEmpty()) {
                     ""
                 } else {
