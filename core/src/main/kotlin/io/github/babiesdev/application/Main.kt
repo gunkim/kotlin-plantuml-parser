@@ -11,6 +11,7 @@ import kotlinx.ast.grammar.kotlin.common.summary.PackageHeader
 import kotlinx.ast.grammar.kotlin.target.antlr.kotlin.KotlinGrammarAntlrKotlinParser
 import java.nio.file.Path
 import java.util.*
+import kotlin.io.path.isDirectory
 import kotlin.io.path.listDirectoryEntries
 import kotlin.io.path.pathString
 
@@ -29,9 +30,18 @@ data class Function(
 
 fun main() {
     val path =
-        Path.of("/Users/gunkim/private-workspace/kotlin-plantuml-parser/core/src/main/kotlin/io/github/babiesdev/domain/plantuml")
+        Path.of("/Users/gunkim/private-workspace/kotlin-plantuml-parser/core/src/main/kotlin/io/github/babiesdev/domain")
 
-    val astList: List<Ast> = path.listDirectoryEntries()
+    val targets: List<Path> = path.listDirectoryEntries()
+        .flatMap {
+            if (it.isDirectory()) {
+                it.listDirectoryEntries()
+            } else {
+                listOf(it)
+            }
+        }
+
+    val astList: List<Ast> = targets
         .map { AstSource.File(it.pathString) }
         .map { KotlinGrammarAntlrKotlinParser.parseKotlinFile(it) }
         .flatMap { it.summary(true).get() }
