@@ -1,6 +1,6 @@
-package io.github.babiesdev.domain
+package io.github.gunkim.domain
 
-import io.github.babiesdev.domain.plantuml.PumlClass
+import io.github.gunkim.domain.plantuml.PumlClass
 
 class PumlGenerator(
     private val packages: List<PumlClass>,

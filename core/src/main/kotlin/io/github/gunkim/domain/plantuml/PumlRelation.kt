@@ -1,4 +1,4 @@
-package io.github.babiesdev.domain.plantuml
+package io.github.gunkim.domain.plantuml
 
 class PumlRelation(
     val target: String,

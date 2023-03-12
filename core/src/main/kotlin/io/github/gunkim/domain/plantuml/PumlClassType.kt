@@ -1,4 +1,4 @@
-package io.github.babiesdev.domain.plantuml
+package io.github.gunkim.domain.plantuml
 
 enum class PumlClassType(
     val symbol: String
