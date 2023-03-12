@@ -1,6 +1,6 @@
-package io.github.babiesdev.domain.plantuml
+package io.github.gunkim.domain.plantuml
 
-import io.github.babiesdev.domain.plantuml.Visibility.PUBLIC
+import io.github.gunkim.domain.plantuml.Visibility.PUBLIC
 
 class PumlField(
     private val name: String,

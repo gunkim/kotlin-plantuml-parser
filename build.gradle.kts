@@ -10,7 +10,7 @@ allprojects {
     apply(plugin = "kotlin")
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
-    group = "io.github.babiesdev"
+    group = "io.github.gunkim"
     version = "1.0.0"
 
     repositories {

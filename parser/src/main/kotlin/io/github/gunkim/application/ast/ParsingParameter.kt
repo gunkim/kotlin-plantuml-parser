@@ -1,7 +1,7 @@
-package io.github.babiesdev.application.ast
+package io.github.gunkim.application.ast
 
-import io.github.babiesdev.domain.plantuml.PumlField
-import io.github.babiesdev.domain.plantuml.Visibility
+import io.github.gunkim.domain.plantuml.PumlField
+import io.github.gunkim.domain.plantuml.Visibility
 import kotlinx.ast.common.klass.KlassDeclaration
 
 data class ParsingParameter(
