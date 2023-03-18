@@ -10,11 +10,11 @@ class PumlClass(
     private val visibility: Visibility = Visibility.PUBLIC,
 ) {
     fun toPlantUml() = """
-            |${visibility.symbol}${type.symbol} ${basePackage.name}.${name} {
+            |${visibility.symbol}${type.symbol} ${basePackage.name}.$name {
             |  ${fields.joinToString(separator = "\n  ") { it.toPlantUml() }}
             |  --
             |  ${methods.joinToString(separator = "\n  ") { it.toPlantUml() }}
             |}
-            |${relation?.toPlantUml("${basePackage.name}.${name}") ?: ""}
+            |${relation?.toPlantUml("${basePackage.name}.$name") ?: ""}
     """.trimMargin()
 }

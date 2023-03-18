@@ -19,6 +19,6 @@ data class ParsingFunction(
                 type = param.type,
                 visibility = Visibility.NONE,
             )
-        }
+        },
     )
 }

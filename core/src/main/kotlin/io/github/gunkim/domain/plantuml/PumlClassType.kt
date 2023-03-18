@@ -1,9 +1,9 @@
 package io.github.gunkim.domain.plantuml
 
 enum class PumlClassType(
-    val symbol: String
+    val symbol: String,
 ) {
     CLASS("class"),
     INTERFACE("interface"),
-    ENUM("enum")
+    ENUM("enum"),
 }

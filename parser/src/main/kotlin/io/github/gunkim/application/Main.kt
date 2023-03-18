@@ -34,7 +34,7 @@ fun main() {
 
 private fun pumlClasses(
     packageName: String,
-    asts: List<Ast>
+    asts: List<Ast>,
 ) = asts
     .filterIsInstance<KlassDeclaration>()
     .map(::createParsingClass)
@@ -47,7 +47,7 @@ private fun generatePumlFile(fileName: String, classes: List<PumlClass>) {
 
 private fun createPumlClass(
     it: ParsingClass,
-    header: String
+    header: String,
 ) = PumlClass(
     name = it.name,
     type = PumlClassType.valueOf(it.type.uppercase()),
@@ -61,7 +61,7 @@ private fun createParsingClass(it: KlassDeclaration) = ParsingClass(
     name = it.identifier!!.rawName,
     fields = it._fields,
     methods = it._methods,
-    visibility = it._modifiers
+    visibility = it._modifiers,
 )
 
 private fun convertPathToAsts(path: Path): List<Ast> =
@@ -73,7 +73,7 @@ private val List<Ast>.packageName: String
         .let { it as PackageHeader }
         .identifier.joinToString(
             separator = ".",
-            transform = KlassIdentifier::rawName
+            transform = KlassIdentifier::rawName,
         )
 
 private val KlassDeclaration._modifiers: String
@@ -94,7 +94,7 @@ private val KlassDeclaration._fields: List<ParsingParameter>
                         "public"
                     } else {
                         param.modifiers.first().modifier
-                    }
+                    },
                 )
             }
         } else {
@@ -118,7 +118,7 @@ private val KlassDeclaration._methods: List<ParsingFunction>
                     "public"
                 } else {
                     it.modifiers.first().modifier
-                }
+                },
             )
         }
     }
@@ -127,8 +127,11 @@ private val Path.subdirectoriesPaths: List<Path>
     get() = if (isDirectory()) {
         listDirectoryEntries()
             .flatMap {
-                if (it.isDirectory()) it.listDirectoryEntries()
-                else listOf(it)
+                if (it.isDirectory()) {
+                    it.listDirectoryEntries()
+                } else {
+                    listOf(it)
+                }
             }
     } else {
         listOf(this)

@@ -19,7 +19,7 @@ data class ParsingParameter(
         fun convert(node: KlassDeclaration) = ParsingParameter(
             node.identifier!!.rawName,
             node.type.first().rawName,
-            "NONE"
+            "NONE",
         )
     }
 }

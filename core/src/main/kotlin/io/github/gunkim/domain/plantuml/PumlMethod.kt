@@ -9,7 +9,6 @@ class PumlMethod(
     private val visibility: Visibility = PUBLIC,
 ) {
     fun toPlantUml() =
-        "${visibility.symbol}fun $name(${parameters.joinToString(separator = ", ") { it.toPlantUml() }})${
-            if (returnType != "Unit" && returnType.isNotBlank()) ": $returnType" else ""
-        }"
+        "${visibility.symbol}fun $name(${parameters.joinToString(separator = ", ") { it.toPlantUml() }})" +
+            "${if (returnType != "Unit" && returnType.isNotBlank()) ": $returnType" else ""}"
 }
