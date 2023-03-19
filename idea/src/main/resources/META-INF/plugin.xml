@@ -1,0 +1,14 @@
+<idea-plugin>
+  <id>io.github.gunkim.application</id>
+  <name>kotlin-plantuml-parser</name>
+  <vendor email="gunkim.dev@gmail.com" url="https://github.com/gunkim">gunkim</vendor>
+
+  <description><![CDATA[
+      This plugin is designed for IntelliJ IDEA and provides functionality for parsing Kotlin code into PlantUML diagrams.
+  ]]></description>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+  </extensions>
+</idea-plugin>
