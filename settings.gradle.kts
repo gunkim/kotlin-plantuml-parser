@@ -1,5 +1,5 @@
 rootProject.name = "kotlin-plantuml-parser"
 
-include("core")
-include("parser")
-include("idea")
+include("kpuml-core")
+include("kpuml-parser")
+include("kpuml-plugin")
